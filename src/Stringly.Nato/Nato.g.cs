@@ -67,7 +67,7 @@ public static class Start
 
 /// <summary>
 /// Chain-<b>continuing</b> tokens. Available with <c>using Stringly.Nato;</c>.
-/// Hand-written macros live in a separate partial of this class.
+/// Hand-written macros, if any, live in a separate partial of this class.
 /// </summary>
 public static partial class NatoExtensions
 {

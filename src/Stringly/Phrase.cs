@@ -30,6 +30,13 @@ public sealed partial class Phrase
 
     private readonly Node? _head;
 
+    // Lazily-memoised render. A Phrase is immutable, so its string is deterministic and can be
+    // computed once. The race between two threads rendering a shared Phrase is benign: a
+    // reference-sized write is atomic and both threads compute the identical string, so a reader
+    // never sees a torn value — only (at worst) duplicated work. Do NOT "fix" this with a lock;
+    // that would defeat the optimisation on a lightweight, shareable type.
+    private string? _rendered;
+
     private Phrase(Node? head) => _head = head;
 
     /// <summary>The empty phrase — the root every chain ultimately grows from.</summary>
@@ -104,11 +111,19 @@ public sealed partial class Phrase
         return new Phrase(new Node(new Cased(Flatten(_head), mode), null));
     }
 
-    /// <summary>Concatenates another phrase onto this one, sharing both fragment trees.</summary>
+    /// <summary>
+    /// Concatenates another phrase onto this one. The left prefix is shared; the right operand's
+    /// fragments are re-hung onto this list (O(n) in the right operand's length).
+    /// </summary>
     public Phrase Concat(Phrase other)
     {
+        if (other._head is null)
+        {
+            return this;
+        }
+
         var result = this;
-        foreach (var fragment in InOrder(other._head))
+        foreach (var fragment in OldestFirst(other._head))
         {
             result = result.Push(fragment);
         }
@@ -118,11 +133,34 @@ public sealed partial class Phrase
 
     // ---- Rendering -----------------------------------------------------------------------------
 
-    /// <summary>Materialises the phrase. This is the single place where text is actually built.</summary>
+    /// <summary>Materialises the phrase. Computed once and memoised (the phrase is immutable).</summary>
     public override string ToString()
     {
-        var sb = new StringBuilder();
-        foreach (var fragment in InOrder(_head))
+        var cached = _rendered;
+        if (cached is not null)
+        {
+            return cached;
+        }
+
+        var result = _head is null ? string.Empty : Render(_head);
+        _rendered = result; // benign race — see the field's comment
+        return result;
+    }
+
+    private static Frag Flatten(Node head) => new Lit(Render(head));
+
+    private static string Render(Node head)
+    {
+        var frags = OldestFirst(head);
+
+        var capacity = 0;
+        foreach (var fragment in frags)
+        {
+            capacity += fragment.CapacityHint;
+        }
+
+        var sb = new StringBuilder(capacity < 0 ? 0 : capacity);
+        foreach (var fragment in frags)
         {
             fragment.Write(sb);
         }
@@ -130,27 +168,26 @@ public sealed partial class Phrase
         return sb.ToString();
     }
 
-    private static Frag Flatten(Node? head)
+    /// <summary>
+    /// Returns the chain's fragments oldest-first in a single right-sized array — one allocation,
+    /// no <see cref="Stack{T}"/> growth and no boxed enumerator. The list is stored newest-first.
+    /// </summary>
+    private static Frag[] OldestFirst(Node head)
     {
-        var sb = new StringBuilder();
-        foreach (var fragment in InOrder(head))
-        {
-            fragment.Write(sb);
-        }
-
-        return new Lit(sb.ToString());
-    }
-
-    private static IEnumerable<Frag> InOrder(Node? head)
-    {
-        // Segments are stored newest-first; reverse them to oldest-first for rendering.
-        var stack = new Stack<Frag>();
+        var depth = 0;
         for (var node = head; node is not null; node = node.Prev)
         {
-            stack.Push(node.Value);
+            depth++;
         }
 
-        return stack;
+        var buffer = new Frag[depth];
+        var i = depth;
+        for (var node = head; node is not null; node = node.Prev)
+        {
+            buffer[--i] = node.Value;
+        }
+
+        return buffer;
     }
 
     // ---- Operators -----------------------------------------------------------------------------

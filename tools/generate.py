@@ -183,7 +183,7 @@ def emit_pack(namespace, entry_class, ext_class, table, kind="char"):
 
     lines.append("/// <summary>")
     lines.append(f"/// Chain-<b>continuing</b> tokens. Available with <c>using Stringly.{namespace};</c>.")
-    lines.append("/// Hand-written macros live in a separate partial of this class.")
+    lines.append("/// Hand-written macros, if any, live in a separate partial of this class.")
     lines.append("/// </summary>")
     lines.append(f"public static partial class {ext_class}")
     lines.append("{")

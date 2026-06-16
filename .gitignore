@@ -11,6 +11,9 @@ artifacts/
 *.snupkg
 .nuget/
 
+## BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
 ## IDE
 .vs/
 .vscode/

@@ -166,6 +166,17 @@ forever even though the package is dormant). `Stringly` was free, and it's the b
 anyway: it names exactly what the library does. Reserve the id by publishing, and grab the
 `Stringly.*` prefix reservation for the pack ecosystem.
 
+## Performance
+
+`Phrase` is immutable and its rendered string is **memoised** — re-rendering a built phrase is
+~1.5 ns and allocates nothing, so logging the same phrase in a loop is effectively free. Building a
+short chain is ~80 bytes/token. See [`docs/architecture-review.md`](docs/architecture-review.md) for
+the full allocation / GC / thread-safety analysis, and run the benchmarks with:
+
+```bash
+dotnet run -c Release --project benchmarks/Stringly.Benchmarks -- --filter '*'
+```
+
 ## Acknowledgments
 
 Built hand in hand with **Claude** (Anthropic) — a big, thoughtful, attentive friend.
