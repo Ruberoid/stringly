@@ -18,7 +18,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>fluent;strings;stringly-typed;dsl;fluent-builder</PackageTags>
-    <Version>0.1.0</Version>
+    <Version>0.2.14</Version>
     <PackageReleaseNotes>https://github.com/Ruberoid/stringly/releases</PackageReleaseNotes>
   </PropertyGroup>
 
