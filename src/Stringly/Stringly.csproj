@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Stringly</PackageId>
-    <Description>Build strings the most over-engineered way imaginable: One().Three().Three().Seven() == "1337". A fluent, extensible, stringly-typed joke library.</Description>
+    <Description>Build strings the most over-engineered way imaginable: One().Three().Three().Seven() == "1337". A fluent, extensible, stringly-typed string builder.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

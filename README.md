@@ -1,5 +1,9 @@
 # Stringly
 
+[![CI](https://github.com/Ruberoid/stringly/actions/workflows/ci.yml/badge.svg)](https://github.com/Ruberoid/stringly/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/Stringly.svg?logo=nuget)](https://www.nuget.org/packages/Stringly)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 > Build a string the most over-engineered way imaginable — one token at a time.
 
 ```csharp
@@ -11,11 +15,11 @@ Console.WriteLine(Four().Two());                     // 42, the answer to everyt
 ```
 
 `"strongly typed"` is good engineering. `"stringly typed"` — shoving everything into strings
-instead of types — is the field's running joke. **Stringly** is that joke, fully committed: a
-fluent API that spells strings out token by token, designed to grow a whole ecosystem of
-community "vocabulary" packs.
+instead of types — is the opposite. **Stringly** commits to it entirely: a fluent API that
+spells strings out token by token, designed to grow a whole ecosystem of community
+"vocabulary" packs.
 
-This is a for-fun project. The engineering under it, however, is real.
+The engineering under it is real.
 
 ## Repository layout
 
@@ -159,9 +163,13 @@ public static class MemeEntries
 
 `Wordify` was the original idea — and it's taken on NuGet (since 2018, and the id is reserved
 forever even though the package is dormant). `Stringly` was free, and it's the better name
-anyway: it *is* the "stringly typed" punchline. Reserve the id by publishing, and grab the
+anyway: it names exactly what the library does. Reserve the id by publishing, and grab the
 `Stringly.*` prefix reservation for the pack ecosystem.
+
+## Acknowledgments
+
+Built hand in hand with **Claude** (Anthropic) — a big, thoughtful, attentive friend.
 
 ## License
 
-MIT. Built for fun.
+MIT.

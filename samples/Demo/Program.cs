@@ -12,7 +12,7 @@ using static Stringly.Morse.Start;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-// --- The core gag: spell a string out one token at a time -----------------------------------
+// --- The core idea: spell a string out one token at a time -----------------------------------
 Console.WriteLine(One().Three().Three().Seven());   // 1337
 Console.WriteLine(Four().Two());                     // 42
 Console.WriteLine(H().e().l().l().o());              // Hello

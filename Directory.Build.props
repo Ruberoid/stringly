@@ -12,12 +12,14 @@
   <PropertyGroup>
     <Authors>ruberoid</Authors>
     <Company>musk.fun</Company>
-    <PackageProjectUrl>https://github.com/ruberoid/stringly</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ruberoid/stringly</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Ruberoid/stringly</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Ruberoid/stringly</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>fluent;strings;joke;stringly-typed;dsl</PackageTags>
+    <PackageTags>fluent;strings;stringly-typed;dsl;fluent-builder</PackageTags>
     <Version>0.1.0</Version>
+    <PackageReleaseNotes>https://github.com/Ruberoid/stringly/releases</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

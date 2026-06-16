@@ -1,0 +1,50 @@
+name: Publish
+
+# Publishes all packable projects to NuGet.
+#   * push a tag like v0.1.0  -> packs with that version and pushes
+#   * manual run (workflow_dispatch) -> packs with the csproj version and pushes
+#
+# Requires repository secret NUGET_API_KEY (Settings -> Secrets and variables -> Actions).
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Resolve version from tag
+        id: ver
+        run: |
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            echo "args=-p:Version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pack
+        run: dotnet pack -c Release -o ${{ github.workspace }}/artifacts ${{ steps.ver.outputs.args }}
+
+      - name: Push to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "::error::Secret NUGET_API_KEY is not set."
+            exit 1
+          fi
+          dotnet nuget push "artifacts/*.nupkg" \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate

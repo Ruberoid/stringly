@@ -11,8 +11,8 @@ Console.WriteLine(Four().Two());                     // 42, the answer to everyt
 ```
 
 `"strongly typed"` is good engineering. `"stringly typed"` — shoving everything into
-strings — is the running joke of the type-system world. **Stringly** takes that joke and
-commits to it completely: a fluent API where you spell strings out one token at a time.
+strings — is the opposite. **Stringly** commits to it completely: a fluent API where you
+spell strings out one token at a time.
 
 ## How it reads
 
@@ -66,4 +66,4 @@ C# 14 `extension` members a pack can even contribute its own chain-starting entr
 - `using static Stringly.Say;` is what unlocks the bare `One()` entry calls.
 - Requires .NET 10 / C# 14.
 
-MIT. Built for fun.
+MIT.
