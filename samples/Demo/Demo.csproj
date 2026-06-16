@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Stringly\Stringly.csproj" />
+    <ProjectReference Include="..\..\src\Stringly.Nato\Stringly.Nato.csproj" />
+    <ProjectReference Include="..\..\src\Stringly.Greek\Stringly.Greek.csproj" />
+    <ProjectReference Include="..\..\src\Stringly.Emoji\Stringly.Emoji.csproj" />
+    <ProjectReference Include="..\..\src\Stringly.Morse\Stringly.Morse.csproj" />
+  </ItemGroup>
+
+</Project>

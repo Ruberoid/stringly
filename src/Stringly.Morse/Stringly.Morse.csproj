@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Stringly.Morse</PackageId>
+    <Description>Morse code pack for Stringly: build dits and dahs by hand, or convert an accumulated phrase with ToMorse() — "SOS".ToMorse() spells "... --- ...".</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stringly\Stringly.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Stringly.Nato</PackageId>
+    <Description>NATO phonetic alphabet pack for Stringly: Alpha().Bravo().Charlie() and radio macros like TenFour(). An example of how to extend Stringly from a separate package.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stringly\Stringly.csproj" />
+  </ItemGroup>
+
+</Project>

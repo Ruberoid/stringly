@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Stringly.Greek</PackageId>
+    <Description>Greek alphabet pack for Stringly: Alpha().Beta().Gamma() spells "αβγ" in real Unicode glyphs. Demonstrates that Stringly tokens are not limited to ASCII.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stringly\Stringly.csproj" />
+  </ItemGroup>
+
+</Project>

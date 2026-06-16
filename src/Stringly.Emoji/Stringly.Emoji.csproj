@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Stringly.Emoji</PackageId>
+    <Description>Emoji pack for Stringly: Fire().Rocket().Hundred() spells "🔥🚀💯". Multi-codepoint tokens, proving Stringly chains aren't limited to single chars.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stringly\Stringly.csproj" />
+  </ItemGroup>
+
+</Project>
